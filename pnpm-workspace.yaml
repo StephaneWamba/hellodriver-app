@@ -1,0 +1,6 @@
+packages:
+  - 'admin'
+  - 'backend'
+  - 'web'
+  - 'whatsapp-sim'
+  - 'packages/*'

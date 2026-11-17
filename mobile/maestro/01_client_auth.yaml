@@ -1,0 +1,33 @@
+appId: com.example.mobile
+---
+- launchApp:
+    clearState: true
+
+# Enter phone number
+- tapOn:
+    id: "phone_field"
+    optional: true
+- tapOn:
+    text: "Numéro de téléphone"
+    optional: true
+- inputText: "77716770"
+
+- tapOn:
+    text: "Continuer"
+
+- assertVisible:
+    text: "Code de vérification"
+    timeout: 8000
+
+# Fetch OTP via evalScript
+- evalScript: |
+    const response = http.get("https://hellodriver-main.fly.dev/auth/dev/otp/%2B24177716770", {
+      headers: { "x-dev-key": "21765bcba2f1dc319f29b155d451159a97855a263f54796e89552364c4fd4b34" }
+    });
+    output.otp = JSON.parse(response.body).code;
+
+- inputText: ${output.otp}
+
+- assertVisible:
+    text: "Accueil"
+    timeout: 10000

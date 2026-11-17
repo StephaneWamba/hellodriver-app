@@ -1,0 +1,14 @@
+app = "hellodriver-redis"
+primary_region = "jnb"
+
+[build]
+dockerfile = "Dockerfile"
+
+[[mounts]]
+source = "redis_data"
+destination = "/data"
+
+[vm]
+cpu_kind = "shared"
+cpus = 1
+memory_mb = 256
